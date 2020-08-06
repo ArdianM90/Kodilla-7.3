@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -82,7 +83,7 @@ public class KodillaCourseApplication {
         Forum theForum = new Forum();
         Map<String, ForumUser> reasultListOfUsers = theForum.getUserList().stream()
                 .filter(user -> user.getSex() == 'F')
-                .filter(user ->  (LocalDate.now().getYear() - user.getBirthDate().getYear()) > 20)
+                .filter(user ->  (user.getBirthDate().until(LocalDate.now(), ChronoUnit.YEARS)) > 20)
                 .filter(user -> user.getPostsCount() >= 1)
                 .collect(Collectors.toMap(ForumUser::getId, user -> user));
         System.out.println("# elements: " + reasultListOfUsers.size());

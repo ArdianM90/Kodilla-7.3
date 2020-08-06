@@ -1,6 +1,7 @@
 package com.kodilla.stream.forumuser;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public final class ForumUser {
     private final String id;
@@ -20,7 +21,7 @@ public final class ForumUser {
 
     @Override
     public String toString() {
-        return "ForumUser "+id+": login-"+login +"; płeć-"+sex+"; data urodzenia-"+birthDate+"; posty-"+postsCount+";";
+        return "ForumUser "+id+": login-"+login +"; płeć-"+sex+"; data urodzenia-"+birthDate+"; posty-"+postsCount+"; minęło lat od urodzenia: "+this.getBirthDate().until(LocalDate.now(), ChronoUnit.YEARS);
     }
 
     //gettery
